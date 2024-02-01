@@ -2,6 +2,8 @@ package com.sthore.msOperador.models;
 
 
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +29,7 @@ public class Categorias {
 
   
 
-    @Column(length = Integer.MAX_VALUE)
+    @Column(nullable = false, length = 200)
     private String imageUrl;
 
     public Long getId() {
@@ -43,15 +45,21 @@ public class Categorias {
     }
 
     public void setName(String name) {
+        if (Objects.isNull(name)) {
+            name="";
+        }  
         this.name = name;
     }
 
     public String getImageUrl() {
-        return name;
+        return imageUrl;
     }
 
-    public void setImageUrl(String name) {
-        this.name = name;
+    public void setImageUrl(String imageUrl) {
+        if (Objects.isNull(imageUrl)) {
+            imageUrl="";
+        } 
+        this.imageUrl = imageUrl;
     }
     /* Id: int primary key
 Name: varchar(50)

@@ -3,6 +3,8 @@ package com.sthore.msOperador.models;
 
 
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +31,7 @@ public class Product {
     @Column(length = 200)
     private String description;
 
-    @Column(length = Integer.MAX_VALUE)
+    @Column(nullable = false, length = 200)
     private String imageUrl;
 /* 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -51,6 +53,9 @@ public class Product {
     }
 
     public void setName(String name) {
+        if (Objects.isNull(name)) {
+            name="";
+        } 
         this.name = name;
     }
 
@@ -59,6 +64,9 @@ public class Product {
     }
 
     public void setPrice(Double price) {
+        if (Objects.isNull(price)) {
+            price=0.00;
+        } 
         this.price = price;
     }
 
@@ -67,6 +75,9 @@ public class Product {
     }
 
     public void setDescription(String description) {
+        if (Objects.isNull(description)) {
+            description="";
+        } 
         this.description = description;
     }
 
@@ -75,6 +86,9 @@ public class Product {
     }
 
     public void setImageUrl(String imageUrl) {
+          if (Objects.isNull(imageUrl)) {
+            imageUrl="";
+        } 
         this.imageUrl = imageUrl;
     }
 

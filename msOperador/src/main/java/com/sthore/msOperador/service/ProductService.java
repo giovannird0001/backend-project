@@ -38,4 +38,8 @@ public class ProductService {
             productRepository.save(product);
         }
     }
+   /*  public void setImageUrl(String str) {
+        productRepository.save(str);
+    }  */
+     
 }
