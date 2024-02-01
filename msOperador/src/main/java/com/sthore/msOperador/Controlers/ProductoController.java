@@ -45,6 +45,7 @@ public class ProductoController {
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
+    
     @GetMapping("/holamundo")
     public String holaMundo() {
         return "¡Hola Mundo!";
