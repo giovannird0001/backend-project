@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Products by Name</title>
+</head>
+<body>
+
+    <form id="searchForm">
+        <label for="productName">Nombre del Producto:</label>
+        <input type="text" id="productName" name="productName" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <div id="searchResults"></div>
+
+    <script>
+        const searchProductsByName = async (name) => {
+            try {
+                const response = await fetch(`http://localhost:7001/product/search?keyword=${encodeURIComponent(name)}`);
+                const data = await response.json();
+                displaySearchResults(data);
+            } catch (error) {
+                console.error('Error al buscar productos por nombre:', error);
+            }
+        };
+
+        const displaySearchResults = (results) => {
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+
+            if (results.length === 0) {
+                resultsContainer.textContent = 'No se encontraron productos.';
+            } else {
+                const list = document.createElement('ul');
+                results.forEach(product => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `ID: ${product.id}, Nombre: ${product.name}, Precio: ${product.price}`;
+                    list.appendChild(listItem);
+                });
+                resultsContainer.appendChild(list);
+            }
+        };
+
+        const searchForm = document.getElementById('searchForm');
+        searchForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const productName = document.getElementById('productName').value;
+            searchProductsByName(productName);
+        });
+
+        // Cargar resultados iniciales
+        const initialProductName = 'Producto 4';
+        searchProductsByName(initialProductName);
+    </script>
+
+</body>
+</html>
