@@ -29,7 +29,7 @@ import java.util.List;
  
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/search")
 @RequiredArgsConstructor
 @RefreshScope
 @Getter
